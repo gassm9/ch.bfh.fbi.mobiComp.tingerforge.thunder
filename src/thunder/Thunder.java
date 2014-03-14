@@ -3,6 +3,7 @@ package thunder;
 import com.tinkerforge.Device;
 
 import sensor.AmbientLightSensor;
+import sensor.SoundIntensitySensor;
 import ch.quantasy.tinkerforge.tinker.agent.implementation.TinkerforgeStackAgent;
 import ch.quantasy.tinkerforge.tinker.application.implementation.AbstractTinkerforgeApplication;
 
@@ -14,9 +15,13 @@ public class Thunder extends AbstractTinkerforgeApplication {
 	// Why is it not 0? Old cheese might be glowing in the dark ;-)
 	public static final int LIGHT_IS_SWITCHED_ON = 8;
 	public static final int LIGHT_IS_SWITCHED_OFF = 7;
+	private long startTime;
+	private long endTime;
+	private boolean started = false;
 
 
 	private final AmbientLightSensor ambientLight;
+	private final SoundIntensitySensor soundIntensity;
 
 	/**
 	 * The {@link FridgeSensor} and the {@link FridgeViewer} are instantiated
@@ -27,7 +32,9 @@ public class Thunder extends AbstractTinkerforgeApplication {
 	 */
 	public Thunder() {
 		this.ambientLight = new AmbientLightSensor(this);
+		this.soundIntensity =  new SoundIntensitySensor(this);
 		super.addTinkerforgeApplication(this.ambientLight);
+		super.addTinkerforgeApplication(this.soundIntensity);
 	
 	}
 
@@ -39,7 +46,20 @@ public class Thunder extends AbstractTinkerforgeApplication {
 	 * {@link AmbientLightApplication}.
 	 */
 	public void setAmbientDarkState(final boolean latestAnswerIsItDark) {
+		startTime = System.currentTimeMillis();
+		started = true;
 		System.out.println(!latestAnswerIsItDark);
+	}
+	
+	public void setNoize(final int noize) {
+		endTime = System.currentTimeMillis();
+		if(started){
+			long duration = (endTime - startTime) /1000;
+			System.out.println("Dauer[s]: "+ duration);
+			System.out.println("Entfernung[m]: "+ duration*340);
+			started = false;
+		}
+		System.out.println(noize);
 	}
 
 

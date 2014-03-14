@@ -6,29 +6,29 @@ import ch.quantasy.tinkerforge.tinker.application.definition.TinkerforgeApplicat
 
 public class ThunderManager {
 	// The 'server'-name of the fridge-sensor-stack
-	public final TinkerforgeStackAgentIdentifier FRIDGE_SENSOR = new TinkerforgeStackAgentIdentifier(
+	public final TinkerforgeStackAgentIdentifier THUNDER_SENSOR = new TinkerforgeStackAgentIdentifier(
 			"MasterBrick69");
 	// Assumes to be connected via USB
-	public final TinkerforgeStackAgentIdentifier FRIDGE_VIEWER = new TinkerforgeStackAgentIdentifier(
+	public final TinkerforgeStackAgentIdentifier THUNDER_VIEWER = new TinkerforgeStackAgentIdentifier(
 			"localhost");
-	private final TinkerforgeApplication fridgeIt;
+	private final TinkerforgeApplication thunderApp;
 
 	public ThunderManager() {
-		this.fridgeIt = new Thunder();
+		this.thunderApp= new Thunder();
 	}
 
 	public void start() {
-		TinkerforgeStackAgency.getInstance().getStackAgent(FRIDGE_VIEWER)
-				.addApplication(fridgeIt);
-		TinkerforgeStackAgency.getInstance().getStackAgent(FRIDGE_SENSOR)
-				.addApplication(fridgeIt);
+		TinkerforgeStackAgency.getInstance().getStackAgent(THUNDER_VIEWER)
+				.addApplication(thunderApp);
+		TinkerforgeStackAgency.getInstance().getStackAgent(THUNDER_SENSOR)
+				.addApplication(thunderApp);
 	}
 
 	public void stop() {
-		TinkerforgeStackAgency.getInstance().getStackAgent(FRIDGE_VIEWER)
-				.removeApplication(fridgeIt);
-		TinkerforgeStackAgency.getInstance().getStackAgent(FRIDGE_SENSOR)
-				.removeApplication(fridgeIt);
+		TinkerforgeStackAgency.getInstance().getStackAgent(THUNDER_VIEWER)
+				.removeApplication(thunderApp);
+		TinkerforgeStackAgency.getInstance().getStackAgent(THUNDER_SENSOR)
+				.removeApplication(thunderApp);
 	}
 
 	/**
