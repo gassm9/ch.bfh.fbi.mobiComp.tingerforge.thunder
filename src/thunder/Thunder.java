@@ -59,7 +59,8 @@ public class Thunder extends AbstractTinkerforgeApplication {
 			System.out.println("Entfernung[m]: "+ duration*340);
 			started = false;
 		}
-		System.out.println(noize);
+		//print noize every 100ms
+		//System.out.println(noize);
 	}
 
 

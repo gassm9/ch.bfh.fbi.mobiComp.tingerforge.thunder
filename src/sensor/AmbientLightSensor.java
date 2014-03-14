@@ -17,8 +17,8 @@ implements IlluminanceReachedListener {
 private final Thunder thunder;
 private BrickletAmbientLight ambientLightBricklet;
 private boolean latestAnswerIsItDark;
-private int ambientHistereseMin = 7;
-private int ambientHistereseMax = 9;
+private int ambientHistereseMin = 50;
+private int ambientHistereseMax = 4000;
 
 /**
 * Creates a new instance of {@link AmbientLightApplication}
@@ -53,6 +53,17 @@ if (TinkerforgeDevice.getDevice(device) == TinkerforgeDevice.AmbientLight) {
 	this.ambientLightBricklet = (BrickletAmbientLight) device;
 	this.ambientLightBricklet.addIlluminanceReachedListener(this);
 	this.setAmbientHisteres();
+//print illuminance	
+//	this.ambientLightBricklet.addIlluminanceListener(this);
+//	try {
+//		this.ambientLightBricklet.setIlluminanceCallbackPeriod(100);
+//	} catch (TimeoutException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	} catch (NotConnectedException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
 }
 }
 
@@ -151,6 +162,13 @@ if (this.getClass() != obj.getClass()) {
 final AmbientLightSensor other = (AmbientLightSensor) obj;
 return this.thunder==other.thunder;
 }
+
+//print illuminance
+//@Override
+//public void illuminance(int illuminance) {
+//	// TODO Auto-generated method stub
+//	System.out.println(illuminance);
+//}
 
 }
 
