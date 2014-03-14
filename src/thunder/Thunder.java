@@ -1,8 +1,10 @@
 package thunder;
 
+import com.tinkerforge.BrickIMU.Acceleration;
 import com.tinkerforge.Device;
 
 import sensor.AmbientLightSensor;
+import sensor.ImmuAccelerationSensor;
 import sensor.SoundIntensitySensor;
 import ch.quantasy.tinkerforge.tinker.agent.implementation.TinkerforgeStackAgent;
 import ch.quantasy.tinkerforge.tinker.application.implementation.AbstractTinkerforgeApplication;
@@ -18,10 +20,12 @@ public class Thunder extends AbstractTinkerforgeApplication {
 	private long startTime;
 	private long endTime;
 	private boolean started = false;
+	private Acceleration acc;
 
 
 	private final AmbientLightSensor ambientLight;
 	private final SoundIntensitySensor soundIntensity;
+	private final ImmuAccelerationSensor imuAcceleration;
 
 	/**
 	 * The {@link FridgeSensor} and the {@link FridgeViewer} are instantiated
@@ -33,8 +37,10 @@ public class Thunder extends AbstractTinkerforgeApplication {
 	public Thunder() {
 		this.ambientLight = new AmbientLightSensor(this);
 		this.soundIntensity =  new SoundIntensitySensor(this);
+		this.imuAcceleration = new ImmuAccelerationSensor(this);
 		super.addTinkerforgeApplication(this.ambientLight);
 		super.addTinkerforgeApplication(this.soundIntensity);
+		super.addTinkerforgeApplication(this.imuAcceleration);
 	
 	}
 
@@ -60,6 +66,14 @@ public class Thunder extends AbstractTinkerforgeApplication {
 			started = false;
 		}
 		System.out.println(noize);
+	}
+	
+	public void setAcceleration(Acceleration acc){
+		this.acc=acc;
+		System.out.println(acc);
+	}
+	public Acceleration getAcceleration(){
+		return acc;
 	}
 
 
