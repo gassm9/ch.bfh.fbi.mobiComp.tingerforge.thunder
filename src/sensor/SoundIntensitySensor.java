@@ -6,9 +6,7 @@ import ch.quantasy.tinkerforge.tinker.agent.implementation.TinkerforgeStackAgent
 import ch.quantasy.tinkerforge.tinker.application.implementation.AbstractTinkerforgeApplication;
 import ch.quantasy.tinkerforge.tinker.core.implementation.TinkerforgeDevice;
 
-import com.tinkerforge.BrickletAmbientLight;
 import com.tinkerforge.BrickletSoundIntensity;
-import com.tinkerforge.BrickletSoundIntensity.IntensityListener;
 import com.tinkerforge.BrickletSoundIntensity.IntensityReachedListener;
 import com.tinkerforge.Device;
 import com.tinkerforge.NotConnectedException;
@@ -60,7 +58,7 @@ public class SoundIntensitySensor extends AbstractTinkerforgeApplication impleme
 					(short) (this.min),
 					(short) (this.max));
 			this.soundIntensitiyBricklet.setDebouncePeriod(10);
-			this.soundIntensitiyBricklet.setIntensityCallbackThreshold('>', (short)(2000), (short)0);
+			this.soundIntensitiyBricklet.setIntensityCallbackThreshold('>', (short)(2500), (short)5000);
 
 			this.thunder.setNoize(this.soundIntensitiyBricklet.getIntensity());
 
