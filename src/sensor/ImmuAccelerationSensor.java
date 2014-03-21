@@ -33,7 +33,7 @@ private BrickIMU imu;
 			this.imu = (BrickIMU) device;
 			this.imu.addAccelerationListener(this);
 			try {
-				this.imu.setAccelerationPeriod(100L);
+				this.imu.setAccelerationPeriod(500L);
 				this.thunder.setAcceleration(this.imu.getAcceleration());
 			} catch (TimeoutException | NotConnectedException e) {
 				// TODO Auto-generated catch block

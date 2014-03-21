@@ -20,7 +20,7 @@ public class Thunder extends AbstractTinkerforgeApplication {
 	private long startTime;
 	private long endTime;
 	private boolean started = false;
-	private Acceleration acc;
+	private int acc = 0;
 
 
 	private final AmbientLightSensor ambientLight;
@@ -52,27 +52,33 @@ public class Thunder extends AbstractTinkerforgeApplication {
 	 * {@link AmbientLightApplication}.
 	 */
 	public void setAmbientDarkState(final boolean latestAnswerIsItDark) {
-		startTime = System.currentTimeMillis();
-		started = true;
+		
+		if(latestAnswerIsItDark==false){
+			startTime = System.currentTimeMillis();
+			started = true;
+		}
 		System.out.println(!latestAnswerIsItDark);
 	}
 	
 	public void setNoize(final int noize) {
 		endTime = System.currentTimeMillis();
-		if(started){
+		if(started && getAcceleration()>2000){
 			long duration = (endTime - startTime) /1000;
 			System.out.println("Dauer[s]: "+ duration);
 			System.out.println("Entfernung[m]: "+ duration*340);
 			started = false;
 		}
-		System.out.println(noize);
+//		System.out.println(noize);
 	}
 	
 	public void setAcceleration(Acceleration acc){
-		this.acc=acc;
-		System.out.println(acc);
+		this.acc=acc.z;
+//		if(Math.pow(acc.z, 2)>2000){
+//		System.out.println(Math.pow(acc.z, 2));
+//		}
 	}
-	public Acceleration getAcceleration(){
+	public int getAcceleration(){
+		acc = (int) Math.pow(acc, 2);
 		return acc;
 	}
 
